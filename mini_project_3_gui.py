@@ -32,7 +32,8 @@ def whole():
     message = tkinter.Label(window, text="Score of all student on whole_score.txt").grid(row=4)
 
 def student():
-    a = Name.get()
+  try:
+    a = S_file.get()
     key_file = open("answer_key.txt", "r")
     key = key_file.readlines()
     ans_file = open(f'''answers/{a}''', "r")
@@ -43,14 +44,16 @@ def student():
          if data==element:
              i = i+1
     message = tkinter.Label(window, text=f'''Score of this student : {i}''').grid(row=4)
-    
+  except:
+    message = tkinter.Label(window, text=f'''There is no such a file''').grid(row=4) 
 
 
 window = tkinter.Tk()
 window.title("Score Checker")
-window.geometry("600x500")
-name = tkinter.Label(window, text="Student file in answers folder:").grid(row=0)
-Name = tkinter.Entry(window).grid(row=0, column=1)
+window.geometry("300x200")
+s_file = tkinter.Label(window, text="Student file in answers folder:").grid(row=0)
+S_file= tkinter.Entry(window)
+S_file.grid(row=0, column=1)
 null = tkinter.Label(window).grid(row=1)
 null = tkinter.Label(window).grid(row=2)
 button = tkinter.Button(window, text="Done", command=student).grid(row=3)
